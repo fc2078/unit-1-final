@@ -15,3 +15,11 @@
   - Search for items by name.
 
 
+## Version 1.2
+- 2024-10-17
+- Various bug fixes and improvements and resolve user issues.
+- Features:
+  - Rerun after removing sold-out item from inventory and stop if nonexistent
+  - Fix quantity update
+  - Overwrite confirmation for adding existent items
+  - Display inventory after updating inventory

@@ -8,6 +8,16 @@ def add_item(inventory, name, price, quantity):
     price (str): The price of the item
     quantity (str): The quantity of the item
     """
+    # 3. When adding a new item with the same name as an existing one, the system overwrites the old item without any warning. We've lost data because of this. It would be helpful to have a confirmation prompt before overwriting.
+    # Check if item already exists in the inventory
+    if name in inventory:
+        print(f"Warning: Overwriting existing item '{name}'.")
+        # Ask user if they want to proceed
+        proceed = input("Do you want to proceed? (Y/N): ")
+        if proceed.lower()!= "y":
+            return
+
+    # Add the new item to the inventory
     inventory[name] = {"price": price, "quantity": quantity}
     print(f"{name} added to the inventory.")
 
@@ -31,9 +41,21 @@ def update_quantity(inventory, item_name, new_quantity):
     item_name (str): The name of the item to update
     new_quantity (str): The new quantity of the item
     """
-    inventory[item_name]["quantity"] == new_quantity
-    print(f"{item_name} quantity updated to {new_quantity}.")
+    # Check if the item is already in the inventory or not
+    if item_name not in inventory:
+        print(f"{item_name} is not in the inventory.")
+        return
 
+    # Check if the new quantity is a positive integer
+    elif not new_quantity.isdigit() or int(new_quantity) < 0:
+        print("Invalid quantity. Please enter a positive integer.")
+        return
+    # Update the quantity of an item in the inventory using item name (given that conditions are met)
+    else:
+        inventory[item_name]["quantity"] = new_quantity
+        print(f"Quantity of {item_name} updated to {new_quantity}.")
+        display_inventory(inventory)
+    
 def display_inventory(inventory):
     """
     Display all items in the inventory.
@@ -67,9 +89,11 @@ while True:
     elif choice == "2":
         name = input("Enter item name to remove: ")
         remove_item(inventory, name)
+
     elif choice == "3":
         name = input("Enter item name to update: ")
         quantity = input("Enter new quantity: ")
+
         update_quantity(inventory, name, quantity)
     elif choice == "4":
         display_inventory(inventory)
@@ -78,3 +102,4 @@ while True:
         break
     else:
         print("Invalid choice. Please try again.")
+
