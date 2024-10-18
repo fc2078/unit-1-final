@@ -14,7 +14,6 @@
   - View the current inventory.
   - Search for items by name.
 
-
 ## Version 1.2
 - 2024-10-17
 - Various bug fixes and improvements and resolve user issues.
@@ -23,3 +22,9 @@
   - Fix quantity update
   - Overwrite confirmation for adding existent items
   - Display inventory after updating inventory
+
+## Version 1.3
+- 2024-10-18
+- Bug fixes and improvements
+- Features:
+  - Fix inventory after adding new item (fix ValueError with price and quantity input)

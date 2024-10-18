@@ -18,7 +18,9 @@ def add_item(inventory, name, price, quantity):
             return
 
     # Add the new item to the inventory
-    inventory[name] = {"price": price, "quantity": quantity}
+    # Modified to fix ValueError
+    inventory[name] = {"price": f"{price}", "quantity": f"{quantity}"}
+    
     print(f"{name} added to the inventory.")
 
 def remove_item(inventory, item_name):
@@ -69,7 +71,8 @@ def display_inventory(inventory):
         print("Current Inventory:")
         for name in inventory:
             item = inventory[name]
-            print(f"{name}: Price: ${item['price']:.2f}, Quantity: {item['quantity']}")
+            # Modify to fix ValueError: Unknown format code 'f' for object of type 'str'
+            print(f"{name}: Price: ${float(item['price']):.2f}, Quantity: {int(item['quantity'])}")
 
 # Initialize inventory with two example items
 inventory = {
@@ -77,6 +80,7 @@ inventory = {
     "banana": {"price": 0.75, "quantity": 150}
 }
 
+# While loop for choices
 while True:
     print("\n1. Add item\n2. Remove item\n3. Update quantity\n4. Display inventory\n5. Exit")
     choice = input("Enter your choice (1-5): ")
